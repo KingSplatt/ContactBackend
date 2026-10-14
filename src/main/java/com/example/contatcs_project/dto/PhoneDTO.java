@@ -1,20 +1,24 @@
 package com.example.contatcs_project.dto;
 
-import com.example.contatcs_project.entity.Contact;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
-@Data 
-@AllArgsConstructor 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class PhoneDTO {
-    private final Long id;
-    private final String phone_number;
-    private final Long id_type;
+
+    private Long id;
+
+    @NotNull(message = "Phone number is required")
+    @Pattern(regexp = "^[0-9]{10,15}$", message = "Phone number must contain 10-15 digits")
+    private String phoneNumber;
+
+    @NotNull(message = "Phone type is required")
+    private Long typeId;
+
+    private String typeName;
 }
